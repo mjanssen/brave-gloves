@@ -1,0 +1,13 @@
+{
+    "name": "root/public",
+    "description": "Brave gloves application",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marnix Janssen",
+            "email": "dev.marnix@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
