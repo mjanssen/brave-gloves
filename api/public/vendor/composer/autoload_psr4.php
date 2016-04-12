@@ -6,4 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'setup\\' => array($baseDir . '/app/setup'),
+    'Api\\' => array($baseDir . '/app/controllers/Api'),
 );

@@ -9,5 +9,15 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "setup\\": "app/setup",
+            "Api\\": "app/controllers/Api"
+
+        },
+        "classmap": [
+            "app/controllers"
+        ]
+    }
 }

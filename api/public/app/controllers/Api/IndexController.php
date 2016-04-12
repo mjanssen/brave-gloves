@@ -1,15 +1,15 @@
-<?php
+<?php namespace Api;
 
 /**
  * Class IndexController
  */
-class IndexController extends AbstractController
+class IndexController extends BaseController
 {
     public function indexAction()
     {
         $data = [
-            'gains',
-            'sdfsdf'
+            'test2',
+            'test'
         ];
 
         return $this->response(200, 'OK', $data);
