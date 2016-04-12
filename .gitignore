@@ -1,1 +1,7 @@
 .DS_Store
+arduino/tests
+env/.vagrant
+env/public
+
+*.iml
+.idea/
