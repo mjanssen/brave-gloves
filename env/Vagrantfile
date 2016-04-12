@@ -1,0 +1,59 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+    config.vm.box = "scotch/box"
+    config.vm.network "private_network", ip: "192.168.33.10"
+    config.vm.hostname = "scotchbox"
+    config.vm.synced_folder "../", "/var/www", :mount_options => ["dmode=777", "fmode=666"]
+
+    config.vm.provision "shell", inline: <<-SHELL
+                ## Only thing you probably really care about is right here
+                SUBDOMAINS=("app" "api")
+                ## Loop through all sites
+                for ((i=0; i < ${#SUBDOMAINS[@]}; i++)); do
+                    ## Current Domain
+                    SUBDOMAIN=${SUBDOMAINS[$i]}
+                    DOMAINNAME='bravegloves.dev';
+
+                    if [ "$SUBDOMAIN" = "app" ]; then
+                      FULLDOMAIN=$DOMAINNAME
+                    else
+                      FULLDOMAIN=$SUBDOMAIN.$DOMAINNAME
+                    fi;
+
+                    echo "Creating vhost config for $FULLDOMAIN..."
+                    sudo cp /etc/apache2/sites-available/scotchbox.local.conf /etc/apache2/sites-available/$FULLDOMAIN.conf
+                    echo "Updating vhost config for $FULLDOMAIN..."
+                    sudo sed -i s,scotchbox.local,$FULLDOMAIN,g /etc/apache2/sites-available/$FULLDOMAIN.conf
+                    sudo sed -i s,/var/www/public,/var/www/$SUBDOMAIN/public,g /etc/apache2/sites-available/$FULLDOMAIN.conf
+                    echo "Enabling $FULLDOMAIN Will probably tell you to restart Apache..."
+                    sudo a2ensite $FULLDOMAIN.conf
+                    echo "So let's restart apache..."
+                    sudo service apache2 restart
+                done
+
+                if [ ! -f /etc/php5/apache2/conf.d/30-phalcon.ini ]; then
+
+                  echo "Starting Phalcon setup"
+                  sudo apt-get update
+                  sudo apt-get install php5-dev libpcre3-dev gcc make php5-mysql -y
+                  cd /home/vagrant; mkdir -p phalcon; cd phalcon;
+                  git clone --depth=1 git://github.com/phalcon/cphalcon.git
+                  cd cphalcon/build
+                  sudo ./install
+
+                  echo "Creating required .ini file"
+                  sudo touch /etc/php5/apache2/conf.d/30-phalcon.ini
+                  echo "extension=phalcon.so" >> /etc/php5/apache2/conf.d/30-phalcon.ini
+
+                  echo "Restarting required services..."
+                  sudo service apache2 restart
+                  sudo service php5-fpm restart
+
+                fi;
+
+            SHELL
+
+end
