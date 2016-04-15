@@ -8,8 +8,9 @@ class IndexController extends BaseController
     public function indexAction()
     {
         $data = [
-            'test2',
-            'test'
+            'application' => [
+                'name' => 'Brave Gloves'
+            ]
         ];
 
         return $this->response(200, 'OK', $data);
