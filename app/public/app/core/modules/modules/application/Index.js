@@ -1,10 +1,10 @@
-import riot from 'riot';
+import {mount} from 'utils/Riot';
 
 export default function () {
 
     this.init = function ()
     {
         require('../../../pages/application/Index');
-        riot.mount('index');
+        mount('index');
     }
 }

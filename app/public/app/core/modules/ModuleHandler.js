@@ -18,8 +18,8 @@ export default function ()
 
     var updateApplicationHolder = function (tagName)
     {
-        var element = document.createElement(tagName);
-        document.getElementById('application').appendChild(element);
+//         var element = document.createElement(tagName);
+//         document.getElementById('application').appendChild(element);
     };
 
     var capitalizeFirstLetter = function (string)
