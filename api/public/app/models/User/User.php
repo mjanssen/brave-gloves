@@ -13,5 +13,6 @@ class User extends Model
         $this->setSource("users");
 
         $this->hasOne('gym_id', 'Models\Gym\Gym', 'id', ['alias' => 'Gym']);
+        $this->hasMany('id', 'Models\Gym\Session', 'user_id', ['alias' => 'Sessions']);
     }
 }

@@ -1,5 +1,6 @@
 <?php namespace Api;
 
+use Carbon\Carbon;
 use Services\User\UserService;
 
 /**
@@ -23,12 +24,7 @@ class UserController extends BaseController
     {
         if ($user = $this->service->getUserBySlug($slug)) {
 
-            echo strtotime('24-09-1993');
-            exit();
-
-            $data = ($slug == 'demo')
-                ? $this->buildDemoUser($user)
-                : $this->buildResponse($user);
+            $data = $this->buildResponse($user);
 
             return $this->response(200, 'OK', $data);
         }
@@ -36,49 +32,44 @@ class UserController extends BaseController
         return $this->response(404, 'OK', ['message' => 'User not found']);
     }
 
-    private function buildDemoUser($user)
-    {
-        $data = (object)[
-            'slug' => $user->slug,
-            'firstName' => $user->firstName,
-            'lastName' => $user->lastName,
-            'age' => '22',
-            'gym' => (object)[
-                'name' => $user->Gym->name,
-                'location' => $user->Gym->location,
-            ],
-            'time' => (object)[
-                'average' => (object)[
-                    'session' => '1:38:29',
-                    'active' => '1:04:23'
-                ]
-            ]
-        ];
-
-        return $this->buildResponse($data);
-    }
-
     private function buildResponse($user)
     {
+        $birthDay = Carbon::createFromFormat('Y-m-d', $user->birthday);
+        $age = Carbon::now()->diffInYears($birthDay);
+
+        $averageDuration = 0;
+        $averageEffective = 0;
+
+        if ($user->Sessions) {
+
+            foreach ($user->Sessions as $session) {
+                $averageDuration += strtotime($session->duration);
+                $averageEffective += strtotime($session->effective);
+            }
+
+            $averageDuration = date('h:i:s', $averageDuration / $user->Sessions->count());
+            $averageEffective = date('h:i:s', $averageEffective / $user->Sessions->count());
+        }
+
         return [
             'slug' => $user->slug,
             'user' => [
                 'firstName' => $user->firstName,
                 'lastName' => $user->lastName,
-                'age' => $user->age
+                'age' => $age,
+                'birthday' => $user->birthday,
             ],
             'gym' => [
-                'name' => $user->gym->name,
-                'location' => $user->gym->location,
+                'name' => $user->Gym->name,
+                'location' => $user->Gym->location,
             ],
             'sessions' => [
-
-            ],
-            'time' => [
-                'average' => [
-                    'session' => $user->time->average->session,
-                    'active' => $user->time->average->active
-                ]
+                'averages' => [
+                    'session_time' => $averageDuration,
+                    'effective_time' => $averageEffective
+                ],
+                'total' => $user->Sessions->count(),
+                'items' => $user->Sessions->toArray()
             ]
         ];
     }
