@@ -85,8 +85,8 @@ gulp.task('default', ['browser-sync'], function ()
 {
     gulp.watch(appDirectory + 'core/**/*.js', ['browserify']);
     gulp.watch(appDirectory + 'core/**/*.html', ['browserify']);
-//     gulp.watch(appDirectory + 'core/tags/**/*.tag', ['browserify']);
     gulp.watch(appDirectory + 'app.js', ['browserify']);
+    gulp.watch(appDirectory + 'init.js', ['browserify']);
     gulp.watch('*.html', ['html']);
 });
 

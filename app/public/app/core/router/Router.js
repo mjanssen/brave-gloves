@@ -8,7 +8,7 @@ import ModuleHandler from '../modules/ModuleHandler';
 
 export default function ()
 {
-    var router, moduleHandler, routerRoutes = {};
+    var moduleHandler, routerRoutes = {};
 
     this.init = function () {
 
@@ -16,11 +16,11 @@ export default function ()
 
         Object.keys(routes).map(function (routeName) {
             routes[routeName].map(function (route) {
-                routerRoutes[route.route] = new routeHandlers[routeName]()[route.action](moduleHandler);
+                routerRoutes[route.route] = new routeHandlers[routeName](moduleHandler)[route.action];
             });
         });
 
-        router = new director.Router(routerRoutes).configure({
+        app.router = new director.Router(routerRoutes).configure({
             html5history: true,
             on: onAllRoutes.bind(this),
             before: beforeAllRoutes.bind(this),
@@ -30,7 +30,7 @@ export default function ()
             strict: false // allow trailing slash
         });
 
-        router.init();
+        app.router.init();
     };
 
     var onAllRoutes = function ()
@@ -51,5 +51,6 @@ export default function ()
 
     var notFound = function ()
     {
+
     };
 }

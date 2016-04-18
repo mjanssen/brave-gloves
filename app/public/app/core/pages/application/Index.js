@@ -8,6 +8,10 @@ riot.tag('index', template,
 
     function (opts)
     {
+        this.demoButton.addEventListener('click', function () {
+            app.router.setRoute('user/demo');
+        });
+
         riot.mount('PageHeader');
     }
 );

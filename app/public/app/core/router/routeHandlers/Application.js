@@ -1,7 +1,8 @@
-export default function ()
+
+export default function (moduleHandler)
 {
-    this.index = function (moduleHandler)
+    this.index = function ()
     {
-        moduleHandler.set('index');
+        moduleHandler.set('ApplicationIndex');
     }
 }

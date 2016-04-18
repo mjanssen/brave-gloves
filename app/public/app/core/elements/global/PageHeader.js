@@ -8,10 +8,5 @@ riot.tag('PageHeader', template,
     {
         this.title = opts.title;
         this.class = opts.class;
-
-//         this.demoButton.addEventListener('click', function ()
-//         {
-//             console.log('sdfsdf');
-//         });
     }
 );
