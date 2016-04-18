@@ -1,9 +1,9 @@
-import Riot from 'riot';
+import riot from 'riot';
 import {load} from '../../utils/Utils';
 
 var template = require('./templates/PageTitle.html');
 
-Riot.tag('PageTitle', template,
+riot.tag('PageTitle', template,
 
     function (opts)
     {
