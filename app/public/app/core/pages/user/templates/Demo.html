@@ -1,3 +1,42 @@
-<PageHeader class="background-jasper" title="Demo page"></PageHeader>
+<PageHeader class="background-mako" title="Demo page"></PageHeader>
 
-<p>gangster</p>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-5">
+            Naam:
+        </div>
+        <div class="col-xs-7">
+            {user.firstName} {user.lastName}
+        </div>
+        <div class="col-xs-5">
+            Leeftijd:
+        </div>
+        <div class="col-xs-7">
+            {user.age}
+        </div>
+        <div class="col-xs-5">
+            Gym:
+        </div>
+        <div class="col-xs-7">
+            {gym.name}
+        </div>
+        <div class="col-xs-5">
+            Gym location:
+        </div>
+        <div class="col-xs-7">
+            {gym.location}
+        </div>
+        <div class="col-xs-5">
+            Gem. gym tijd:
+        </div>
+        <div class="col-xs-7">
+            {time.average.session} h
+        </div>
+        <div class="col-xs-5">
+            Effectiefheid:
+        </div>
+        <div class="col-xs-7">
+            {time.average.active} h
+        </div>
+    </div>
+</div>

@@ -18,5 +18,8 @@ class ApiRoutes extends Router
 
         // Add routes below
         $this->addGet('/', 'Index::index');
+
+        // User routes
+        $this->addGet('/user/{username}', 'User::getUser');
     }
 }

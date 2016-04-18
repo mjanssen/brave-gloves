@@ -17,10 +17,12 @@ html, body, #application {
     -ms-transform: translateY(-50%);
 }
 
-.background-jasper {
+PageHeader .background-jasper {
     background-color: #D64541;
     color: #ECECEC;
-    -moz-box-shadow:    inset 0 0 15px #525659;
-    -webkit-box-shadow: inset 0 0 15px #525659;
-    box-shadow:         inset 0 0 15px #525659;
+}
+
+PageHeader .background-mako {
+    background-color: #525659;
+    color: #ECECEC;
 }

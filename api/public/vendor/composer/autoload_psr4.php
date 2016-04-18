@@ -7,5 +7,10 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'setup\\' => array($baseDir . '/app/setup'),
+    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
+    'Services\\' => array($baseDir . '/app/services'),
+    'Models\\' => array($baseDir . '/app/models'),
+    'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Api\\' => array($baseDir . '/app/controllers/Api'),
 );

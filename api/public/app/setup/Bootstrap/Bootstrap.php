@@ -26,8 +26,38 @@ class Bootstrap
         // Setup basic Dependency injector vars
         $this->di->set('view', new View());
 
+        $this->setupDatabase();
+
         // Initialize the API router
         Router::initialize($this->di);
+    }
+
+    private function setupDatabase()
+    {
+        $config = [
+            'host' => 'localhost',
+            'database' => 'scotchbox',
+            'options' => [
+                'username' => 'root',
+                'password' => 'root'
+            ]
+        ];
+
+        $this->di->set('db', function () use ($config) {
+            try {
+                $db = new \Phalcon\Db\Adapter\Pdo\Mysql(
+                    array(
+                        "host" => $config['host'],
+                        "username" => $config['options']['username'],
+                        "password" => $config['options']['password'],
+                        "dbname" => $config['database']
+                    )
+                );
+            } catch (Exception $e) {
+                die("<b>Error when initializing database connection:</b> " . $e->getMessage());
+            }
+            return $db;
+        });
     }
 
     public function run()

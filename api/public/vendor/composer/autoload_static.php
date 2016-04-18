@@ -6,10 +6,28 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit9cf9a9ff134d83e44d029a8e5ee256c0
 {
+    public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         's' => 
         array (
             'setup\\' => 6,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Component\\Translation\\' => 30,
+            'Services\\' => 9,
+        ),
+        'M' => 
+        array (
+            'Models\\' => 7,
+        ),
+        'C' => 
+        array (
+            'Carbon\\' => 7,
         ),
         'A' => 
         array (
@@ -22,6 +40,26 @@ class ComposerStaticInit9cf9a9ff134d83e44d029a8e5ee256c0
         array (
             0 => __DIR__ . '/../..' . '/app/setup',
         ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Component\\Translation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/translation',
+        ),
+        'Services\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/services',
+        ),
+        'Models\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/models',
+        ),
+        'Carbon\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
+        ),
         'Api\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/controllers/Api',
@@ -32,6 +70,7 @@ class ComposerStaticInit9cf9a9ff134d83e44d029a8e5ee256c0
         'AbstractController' => __DIR__ . '/../..' . '/app/controllers/AbstractController.php',
         'Api\\BaseController' => __DIR__ . '/../..' . '/app/controllers/Api/BaseController.php',
         'Api\\IndexController' => __DIR__ . '/../..' . '/app/controllers/Api/IndexController.php',
+        'Api\\UserController' => __DIR__ . '/../..' . '/app/controllers/Api/UserController.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

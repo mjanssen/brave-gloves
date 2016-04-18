@@ -9,12 +9,15 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "nesbot/carbon": "^1.21"
+    },
     "autoload": {
         "psr-4": {
             "setup\\": "app/setup",
-            "Api\\": "app/controllers/Api"
-
+            "Api\\": "app/controllers/Api",
+            "Models\\": "app/models",
+            "Services\\": "app/services"
         },
         "classmap": [
             "app/controllers"
