@@ -5,7 +5,8 @@
         <title>Test</title>
     </head>
     <body>
-        <PageHeader title="Frontpage"></PageHeader>
+
+        <div id="application"></div>
 
         <script src="app/build/app.js"></script>
     </body>

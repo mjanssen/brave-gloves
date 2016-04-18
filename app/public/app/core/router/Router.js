@@ -4,16 +4,19 @@ import * as routes from './Routes'
 import * as routeHandlers from './RouteHandlers'
 
 import director from 'director';
+import ModuleHandler from '../modules/ModuleHandler';
 
 export default function ()
 {
-    var router, routerRoutes = {};
+    var router, moduleHandler, routerRoutes = {};
 
     this.init = function () {
 
+        moduleHandler = new ModuleHandler();
+
         Object.keys(routes).map(function (routeName) {
             routes[routeName].map(function (route) {
-                routerRoutes[route.route] = new routeHandlers[routeName]()[route.action];
+                routerRoutes[route.route] = new routeHandlers[routeName]()[route.action](moduleHandler);
             });
         });
 

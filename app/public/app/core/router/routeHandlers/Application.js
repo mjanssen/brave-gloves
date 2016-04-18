@@ -1,7 +1,7 @@
 export default function ()
 {
-    this.index = function ()
+    this.index = function (moduleHandler)
     {
-        console.log('asdfasfasdfas');
+        moduleHandler.set('index');
     }
 }
