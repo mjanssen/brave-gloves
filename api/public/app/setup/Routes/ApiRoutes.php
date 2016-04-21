@@ -21,5 +21,13 @@ class ApiRoutes extends Router
 
         // User routes
         $this->addGet('/user/{username}', 'User::getUser');
+        
+        // Session routes
+        $this->addPost('/sessions/{username}', 'Session::updateGymSession');
+        $this->addPost('/sessions/new/{username}', 'Session::newSessionForUser');
+
+        // Session times
+        $this->addPost('/sessions/times/{username}/start', 'Session::startGymEffectiveSession');
+        $this->addPost('/sessions/times/{username}/stop', 'Session::stopGymEffectiveSession');
     }
 }

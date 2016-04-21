@@ -39,16 +39,24 @@ class UserController extends BaseController
 
         $averageDuration = 0;
         $averageEffective = 0;
+        $deviceTotal = 0;
 
         if ($user->Sessions) {
 
             foreach ($user->Sessions as $session) {
-                $averageDuration += strtotime($session->duration);
-                $averageEffective += strtotime($session->effective);
+
+                if ($session->duration !== null) {
+                    $averageDuration += strtotime($session->duration);
+                    $deviceTotal++;
+                }
+
+                if ($session->effective !== null) {
+                    $averageEffective += strtotime($session->effective);
+                }
             }
 
-            $averageDuration = date('h:i:s', $averageDuration / $user->Sessions->count());
-            $averageEffective = date('h:i:s', $averageEffective / $user->Sessions->count());
+            $averageDuration = date('h:i:s', $averageDuration / $deviceTotal);
+            $averageEffective = date('h:i:s', $averageEffective / $deviceTotal);
         }
 
         return [

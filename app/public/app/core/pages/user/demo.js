@@ -15,7 +15,7 @@ riot.tag('demo', template,
         {
             this.user = data.user;
             this.gym = data.gym;
-            this.time = data.time;
+            this.averages = data.sessions.averages;
 
             this.update();
         };
