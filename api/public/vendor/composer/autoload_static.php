@@ -25,6 +25,10 @@ class ComposerStaticInit9cf9a9ff134d83e44d029a8e5ee256c0
         array (
             'Models\\' => 7,
         ),
+        'H' => 
+        array (
+            'Helpers\\' => 8,
+        ),
         'C' => 
         array (
             'Carbon\\' => 7,
@@ -56,6 +60,10 @@ class ComposerStaticInit9cf9a9ff134d83e44d029a8e5ee256c0
         array (
             0 => __DIR__ . '/../..' . '/app/models',
         ),
+        'Helpers\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app/helpers',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -70,6 +78,7 @@ class ComposerStaticInit9cf9a9ff134d83e44d029a8e5ee256c0
         'AbstractController' => __DIR__ . '/../..' . '/app/controllers/AbstractController.php',
         'Api\\BaseController' => __DIR__ . '/../..' . '/app/controllers/Api/BaseController.php',
         'Api\\IndexController' => __DIR__ . '/../..' . '/app/controllers/Api/IndexController.php',
+        'Api\\SessionController' => __DIR__ . '/../..' . '/app/controllers/Api/SessionController.php',
         'Api\\UserController' => __DIR__ . '/../..' . '/app/controllers/Api/UserController.php',
     );
 
