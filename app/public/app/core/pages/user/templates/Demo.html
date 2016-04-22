@@ -1,6 +1,9 @@
 <PageHeader class="background-mako" title="Demo page"></PageHeader>
 
 <div class="container">
+
+    <SubHeading title="Info"></SubHeading>
+
     <div class="row">
         <div class="col-xs-5">
             Naam:
@@ -39,4 +42,12 @@
             {averages.effective_time} h
         </div>
     </div>
+
+    <SubHeading title="Actieve sessie"></SubHeading>
+
+    <ActiveSession each={activeSessions}></ActiveSession>
+
+    <SubHeading title="Sessies"></SubHeading>
+
+    <Session each={sessions}></Session>
 </div>

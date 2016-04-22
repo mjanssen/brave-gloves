@@ -1,6 +1,8 @@
 <?php namespace Api;
 
 use Carbon\Carbon;
+use Helpers\TimeCounter;
+use Models\Session\Session;
 use Services\User\UserService;
 
 /**
@@ -39,25 +41,40 @@ class UserController extends BaseController
 
         $averageDuration = 0;
         $averageEffective = 0;
-        $deviceTotal = 0;
+        $averageTotal = 0;
 
-        if ($user->Sessions) {
+        $durationKey = 'duration';
+        $effectiveKey = 'effective';
+
+        if ($user->Sessions->count()) {
+
+            $timeCounter = new TimeCounter();
 
             foreach ($user->Sessions as $session) {
 
                 if ($session->duration !== null) {
-                    $averageDuration += strtotime($session->duration);
-                    $deviceTotal++;
+                    $timeCounter->addTime($durationKey, $session->duration);
+                    $averageTotal++;
                 }
 
                 if ($session->effective !== null) {
-                    $averageEffective += strtotime($session->effective);
+                    $timeCounter->addTime($effectiveKey, $session->effective);
                 }
             }
 
-            $averageDuration = date('h:i:s', $averageDuration / $deviceTotal);
-            $averageEffective = date('h:i:s', $averageEffective / $deviceTotal);
+            $timeCounter->calculate($durationKey);
+            $timeCounter->calculate($effectiveKey);
+
+            $averageDuration = gmdate('H:i:s', $timeCounter->get_total_time($durationKey) / $averageTotal);
+            $averageEffective = gmdate('H:i:s', $timeCounter->get_total_time($effectiveKey) / $averageTotal);
         }
+
+        $activeSession = Session::find([
+            'user_id = :user_id: AND completed = 0',
+            'bind' => [
+                'user_id' => $user->id
+            ]
+        ])->getLast();
 
         return [
             'slug' => $user->slug,
@@ -76,6 +93,7 @@ class UserController extends BaseController
                     'session_time' => $averageDuration,
                     'effective_time' => $averageEffective
                 ],
+                'active' => ($activeSession && $activeSession->EffectiveTimes) ? $activeSession->EffectiveTimes->toArray() : false,
                 'total' => $user->Sessions->count(),
                 'items' => $user->Sessions->toArray()
             ]

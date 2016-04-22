@@ -17,7 +17,8 @@
             "setup\\": "app/setup",
             "Api\\": "app/controllers/Api",
             "Models\\": "app/models",
-            "Services\\": "app/services"
+            "Services\\": "app/services",
+            "Helpers\\": "app/helpers"
         },
         "classmap": [
             "app/controllers"

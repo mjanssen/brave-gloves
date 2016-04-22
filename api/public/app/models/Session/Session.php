@@ -14,13 +14,19 @@ class Session extends Model
         $this->setSource("sessions");
 
         $this->belongsTo('user_id', 'Models\User\User', 'id', ['alias' => 'User']);
-        $this->hasMany('id', 'Models\Session\SessionEffectiveTime', 'session_id', ['alias' => 'EffectiveTimes']);
+
+        $this->hasMany('id', 'Models\Session\SessionEffectiveTime', 'session_id', [
+            'alias' => 'EffectiveTimes',
+            'params' => [
+                'order' => 'id DESC'
+            ]
+        ]);
 
         $this->addBehavior(
             new Timestampable(
                 [
                     'beforeCreate' => [
-                        'field'  => 'timestamp',
+                        'field' => 'timestamp',
                         'format' => 'Y-m-d H:i:s'
                     ]
                 ]

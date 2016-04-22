@@ -11,6 +11,44 @@ html, body, #application {
     top:50%;
 }
 
+.subHeading {
+    padding: 20px 0;
+}
+
+.userSession {
+    margin-bottom: 10px;
+}
+
+.activeSession .title {
+    background-color: #3C5E96;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 1em;
+}
+
+.activeSession {
+    margin-bottom: 10px;
+}
+
+.activeSession .stopped {
+    border: 1px solid #3C5E96;
+}
+
+.activeSession .stopped .inner {
+    padding: 10px;
+}
+
+.activeSession .stopped .inner span {
+    display: block;
+}
+
+.userSession .heading {
+    background-color: #FB8D00;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 1em;
+}
+
 .vertical-center {
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
