@@ -1,0 +1,12 @@
+<div class="activeSession">
+
+    <div class="title">
+        Gestart op: {timestamp_start}
+    </div>
+    <div class="stopped" if="{timestamp_stop !== ''}">
+        <div class="inner">
+            <span>Gestopt op: {timestamp_stop}</span>
+            <span>Sessie duurde {duration} seconden</span>
+        </div>
+    </div>
+</div>
